@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>MedGestão | Área do Paciente</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2869/2869833.png">
+</head>
+<body class="app-container">
+    <aside class="sidebar">
+        <div class="logo"><span class="logo-icon">MG</span> MedGestão</div>
+        <nav class="nav-menu">
+            <button class="nav-item active"><i class="fas fa-calendar-alt"></i> Meus Agendamentos</button>
+            <button class="nav-item"><i class="fas fa-clock"></i> Horários Livres</button>
+          <button class="nav-item btn-sair" onclick="logout()"> <i class="fas fa-sign-out-alt"></i> Sair</button>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header>
+            <h1>Olá, Paciente de Teste</h1>
+            <p>Seja bem-vindo ao seu portal de saúde.</p>
+        </header>
+
+        <div class="calendar-card" style="display: block; padding: 30px; height: auto;">
+            <h3>Selecione um horário disponível:</h3>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px;">
+                <button style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; background: white;">09:00</button>
+                <button style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; background: white;">10:00</button>
+                <button style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; background: #0047AB; color: white;">14:00 (Selecionado)</button>
+            </div>
+            <button class="auth-btn" style="margin-top: 20px; width: 200px;" onclick="alert('Agendado com sucesso!')">Confirmar</button>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+
+:root {
+    --primary-blue: #0047AB;
+    --sidebar-color: #003366;
+    --bg-light: #f4f7fa;
+    --border-color: #e0e6ed;
+    --hour-height: 60px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+body { background: var(--bg-light); display: flex; height: 100vh; }
+
+/* LAYOUT ESTRUTURAL */
+
+.app-container { display: flex; width: 100%; height: 100vh; }
+
+/* SIDEBAR (Corrigida e alinhada) */
+
+.sidebar {
+    width: 250px;
+    background: var(--sidebar-color);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.logo { font-weight: bold; font-size: 22px; margin-bottom: 40px; display: flex; align-items: center; gap: 10px; }
+.logo-icon { background: white; color: var(--sidebar-color); padding: 5px 10px; border-radius: 5px; }
+
+.nav-menu { display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.nav-item {
+    background: transparent;
+    border: none;
+    color: #a0aec0;
+    padding: 12px;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: 0.3s;
+}
+.nav-item.active, .nav-item:hover { background: rgba(255,255,255,0.1); color: white; }
+
+.btn-sair { color: #fc8181; margin-top: auto; }
+
+/* CONTEÚDO PRINCIPAL */
+
+.main-content { flex: 1; padding: 30px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; }
+
+.header-medico h1 { font-size: 24px; color: #2d3748; }
+.badge-info { background: #ebf4ff; color: #2b6cb0; padding: 5px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; display: inline-block; margin-top: 5px; }
+
+/* AGENDA */
+
+.calendar-card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    height: 500px;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.time-gutter { width: 70px; border-right: 1px solid var(--border-color); background: #fdfdfd; }
+.hour-label { height: var(--hour-height); font-size: 12px; color: #718096; text-align: center; padding-top: 10px; border-bottom: 1px dashed #edf2f7; }
+
+.schedule-grid {
+    flex: 1;
+    position: relative;
+    background-image: linear-gradient(#edf2f7 1px, transparent 1px);
+    background-size: 100% var(--hour-height);
+}
+
+.appointment-block {
+    position: absolute;
+    left: 10px; right: 20px;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 13px;
+    border-left: 5px solid;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.blue { background: #ebf8ff; border-left-color: #3182ce; color: #2c5282; }
+.green { background: #f0fff4; border-left-color: #38a169; color: #22543d; }
+
+.appt-name { font-weight: bold; display: block; font-size: 14px; }
+.appt-time { font-size: 11px; opacity: 0.8; }
+
+.now-line { position: absolute; left: 0; right: 0; height: 2px; background: #f56565; z-index: 10; }
+.now-line::before { content: ''; position: absolute; left: -4px; top: -4px; width: 10px; height: 10px; background: #f56565; border-radius: 50%; }

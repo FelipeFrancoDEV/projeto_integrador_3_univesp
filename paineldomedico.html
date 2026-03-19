@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedGestão MG | Sistema de Clínicas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2869/2869833.png">
+</head>
+
+<body onload="verificarSessao()"> 
+
+    <aside class="sidebar">
+        <div class="logo"><span class="logo-icon">MG</span> MedGestão</div>
+        <nav class="nav-menu">
+            <button class="nav-item active" onclick="navegar('agenda')">
+                <i class="fas fa-calendar"></i> Agenda
+            </button>
+            <button class="nav-item" onclick="navegar('financeiro')">
+                <i class="fas fa-wallet"></i> Financeiro
+            </button>
+            <button class="nav-item" onclick="navegar('pacientes')">
+                <i class="fas fa-user-md"></i> Pacientes
+            </button>
+          <button class="nav-item btn-sair" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Sair
+           </button>
+        </nav>
+    </aside>
+        <main class="main-content">
+            <header class="header-medico">
+                <div>
+                    <h1 id="saudacao-texto">Bem-vindo(a)!!!</h1>
+                    <div class="badge-info">
+                        <span id="info-espec">Especialidade</span> | <span id="info-crm">CRM 000000</span>
+                    </div>
+                </div>
+                <button class="btn-action" style="background: var(--primary-blue); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold;">+ Novo Agendamento</button>
+            </header>
+
+           <h2 style="margin-top: 20px; color: #4a5568;"> Compromissos de Hoje - <span id="data-atual" style="color: var(--primary-blue);"></span></h2>
+
+            <div class="calendar-card">
+                <div class="time-gutter">
+                    <div class="hour-label">08:00</div>
+                    <div class="hour-label">09:00</div>
+                    <div class="hour-label">10:00</div>
+                    <div class="hour-label">11:00</div>
+                    <div class="hour-label">12:00</div>
+                    <div class="hour-label">13:00</div>
+                    <div class="hour-label">14:00</div>
+                    <div class="hour-label">15:00</div>
+                    <div class="hour-label">16:00</div>
+                    <div class="hour-label">17:00</div>
+                </div>
+
+                <div class="schedule-grid" id="grid-consultas">
+                    <div id="linha-tempo" class="now-line"></div>
+                    
+                    <div class="appointment-block blue" style="top: 60px; height: 60px;">
+                        <span class="appt-time">09:00 - 10:00</span>
+                        <span class="appt-name"> Nome do Paciente </span>
+                    </div>
+
+                    <div class="appointment-block green" style="top: 180px; height: 90px;">
+                        <span class="appt-time">11:00 - 12:30</span>
+                        <span class="appt-name"> Nome do Paciente - Retorno </span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

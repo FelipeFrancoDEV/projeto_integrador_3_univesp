@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>MedGestão | Agendamento</title>
+    <link rel="stylesheet" href="temadoportaldeacesso.css">
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2869/2869833.png">
+    <style>
+        .grade-horarios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
+        .horario-item { 
+            padding: 10px; border: 1px solid #e0e6ed; border-radius: 6px; 
+            text-align: center; cursor: pointer; font-size: 14px; transition: 0.3s;
+        }
+        .horario-item:hover { background: #f0f7ff; border-color: #0047AB; }
+        .horario-item.ocupado { background: #f5f5f5; color: #ccc; cursor: not-allowed; border-color: #eee; }
+    </style>
+</head>
+<body class="auth-body">
+
+    <div class="auth-card" id="card-agendamento">
+        <div id="passo-login">
+            <h3 style="text-align: center; margin-bottom: 20px;">Acesse para Agendar</h3>
+            <input type="email" class="auth-input" placeholder="Seu e-mail">
+            <input type="password" class="auth-input" placeholder="Sua senha">
+            <button class="auth-btn" onclick="liberarAgenda()">Entrar e Ver Horários</button>
+            
+            <p style="text-align: center; margin-top: 20px; font-size: 14px; color: #718096;">
+                Não tem cadastro? <a href="cadastro.html" style="color: #0047AB; font-weight: bold; text-decoration: none;">Faça agora</a>
+            </p>
+        </div>
+
+        <div id="passo-agenda" style="display: none;">
+            <h3 style="margin-bottom: 10px;">Horários Disponíveis</h3>
+            <p style="font-size: 13px; color: #718096; margin-bottom: 20px;">Olá, selecione o melhor momento para sua consulta:</p>
+            
+            <div class="grade-horarios">
+                <div class="horario-item">08:00</div>
+                <div class="horario-item ocupado">09:00</div> <div class="horario-item">10:00</div>
+                <div class="horario-item">14:00</div>
+                <div class="horario-item">15:00</div>
+                <div class="horario-item ocupado">16:00</div>
+            </div>
+
+            <button class="auth-btn" style="margin-top: 25px;" onclick="confirmar()">Confirmar Agendamento</button>
+            <button onclick="window.location.href='login.html'" style="background:none; border:none; width:100%; margin-top:15px; color:#718096; cursor:pointer; font-size: 12px;">Sair</button>
+        </div>
+    </div>
+
+    <script>
+        function liberarAgenda() {
+            // Aqui o Back-end validaria o usuário. No Front, apenas trocamos a tela:
+            document.getElementById('passo-login').style.display = 'none';
+            document.getElementById('passo-agenda').style.display = 'block';
+            document.getElementById('card-agendamento').style.width = '500px'; // Aumenta o card para a grade
+        }
+        function confirmar() {
+            alert('Agendamento solicitado com sucesso!');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

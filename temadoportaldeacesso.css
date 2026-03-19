@@ -1,0 +1,43 @@
+
+/* auth.css - Estilo para Login e Agendamento */
+
+.auth-body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f7fa;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.auth-card {
+    background: white;
+    width: 380px;
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid #e0e6ed;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column; /* Isso garante que tudo fique empilhado! */
+}
+
+.auth-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #e0e6ed;
+    border-radius: 8px;
+    outline: none;
+}
+
+.auth-btn {
+    width: 100%;
+    background-color: #0047AB;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
