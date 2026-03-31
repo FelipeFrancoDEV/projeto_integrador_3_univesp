@@ -13,13 +13,13 @@
 
 .auth-card {
     background: white;
-    width: 380px;
-    padding: 40px;
-    border-radius: 12px;
-    border: 1px solid #e0e6ed;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    width: 400px; 
+    padding: 45px;
+    border-radius: 16px; 
+    border: none; 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.06); 
     display: flex;
-    flex-direction: column; /* Isso garante que tudo fique empilhado! */
+    flex-direction: column;
 }
 
 .auth-input {

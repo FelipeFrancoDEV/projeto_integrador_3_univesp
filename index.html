@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntegraMed | UNIVESP</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0047AB;
+            --dark: #003366;
+            --text-main: #2d3748;
+            --text-light: #718096;
+            --bg-soft: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: white; color: var(--text-main); line-height: 1.6; overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 8%; background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px); position: fixed; width: 100%; top: 0; z-index: 2000;
+            border-bottom: 1px solid #eee;
+        }
+        .logo { font-weight: 800; font-size: 24px; color: var(--dark); display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-icon { background: var(--dark); color: white; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-size: 16px; }
+
+        .nav-menu { display: flex; gap: 35px; list-style: none; }
+        .nav-link { text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 14px; transition: 0.3s; }
+        .nav-link:hover { color: var(--primary); }
+
+        /* Estilo para as bandeiras ao lado do botão */
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .lang-box { display: flex; gap: 12px; align-items: center; border-right: 1px solid #eee; padding-right: 20px; }
+        .lang-btn { width: 22px; height: auto; cursor: pointer; transition: 0.3s; opacity: 0.8; }
+        .lang-btn:hover { transform: scale(1.1); opacity: 1; }
+
+        .btn-login { 
+            background: transparent; color: var(--primary); padding: 10px 22px; border-radius: 50px; 
+            text-decoration: none; font-weight: 700; font-size: 14px; border: 2px solid var(--primary); transition: 0.3s;
+        }
+        .btn-login:hover { background: var(--primary); color: white; }
+
+        /* --- HERO FULL BACKGROUND --- */
+        .hero {
+            height: 100vh; width: 100%; display: flex; align-items: center; padding: 0 8%;
+            background-image: url('Imagens/PáginaInicial.png');
+            background-size: cover; background-position: center right; background-repeat: no-repeat; position: relative;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.95) 30%, rgba(255,255,255,0.6) 100%); z-index: 1;
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 650px; }
+        .hero-content h1 { font-size: 64px; font-weight: 800; line-height: 1.1; color: var(--dark); margin-bottom: 20px; letter-spacing: -2px; }
+        .hero-content h1 span { color: var(--primary); }
+        .hero-content p { font-size: 20px; color: var(--text-light); margin-bottom: 40px;text-align: justify;}
+
+        .btn-main {
+            padding: 18px 45px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 18px; transition: 0.3s;
+            background: var(--primary); color: white; display: inline-block; box-shadow: 0 10px 25px rgba(0, 71, 171, 0.3);
+        }
+        .btn-main:hover { transform: translateY(-3px); }
+
+        /* --- RECURSOS --- */
+        .features { padding: 100px 8%; background: var(--bg-soft); }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 36px; font-weight: 800; color: var(--dark); }
+
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .feature-card { background: white; padding: 40px; border-radius: 24px; transition: 0.4s; border: 1px solid #edf2f7; }
+        .feature-icon { font-size: 32px; color: var(--primary); margin-bottom: 20px; }
+
+        /* --- QUEM SOMOS --- */
+        .about-section { padding: 100px 8%; background: white; text-align: center; }
+        .about-content { max-width: 800px; margin: 0 auto; }
+        .about-icon { font-size: 50px; color: var(--dark); margin-bottom: 20px; }
+        .about-content h2 { font-size: 36px; color: var(--dark); margin-bottom: 20px; }
+        .about-content p { color: var(--text-light); font-size: 18px; margin-bottom: 30px; }
+        
+        .univesp-card { 
+            background: #f1f5f9; padding: 30px 50px; border-radius: 20px; 
+            border-top: 5px solid var(--primary); display: inline-block; text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+        }
+        .univesp-card h4 { color: var(--dark); margin-bottom: 8px; font-size: 22px; }
+        .univesp-card p { margin-bottom: 0; font-size: 16px; color: var(--primary); font-weight: 700; }
+
+        /* --- FOOTER --- */
+        footer { padding: 40px 8%; background: var(--dark); color: white; text-align: center; }
+        .footer-info { opacity: 0.7; font-size: 13px; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="#" class="logo"><div class="logo-icon">IM</div> IntegraMed</a>
+        <ul class="nav-menu">
+            <li><a href="#">Home</a></li>
+            <li><a href="#recursos" class="nav-link">Recursos</a></li>
+            <li><a href="#quem-somos" class="nav-link">Quem Somos</a></li>
+            <li><a href="agendamento.html" class="nav-link">Agendar</a></li>
+        </ul>
+        
+        <div class="nav-right">
+            <div class="lang-box">
+                <img src="https://cdn-icons-png.flaticon.com/512/197/197374.png" class="lang-btn" title="English" onclick="alert('English version coming soon!')">
+                <img src="https://cdn-icons-png.flaticon.com/512/197/197386.png" class="lang-btn" title="Português" onclick="alert('O site está em Português 😊')">
+            </div>
+            <a href="portaldeacesso.html" class="btn-login">Acessar Portal</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Sua clínica integrada.<br>Seu paciente <span>feliz.</span></h1>
+            <p> Elevando o padrão de atendimento através da centralização de dados.<br>
+             Uma infraestrutura robusta para gestão de prontuários e fluxos operacionais, 
+             desenhada para eliminar a fragmentação tecnológica em clínicas e consultórios.
+            </p>
+            <a href="cadastro.html" class="btn-main">Iniciar Teste Gratuito</a>
+        </div>
+    </header>
+
+    <section id="recursos" class="features">
+        <div class="section-header">
+            <h2>Tudo o que sua clínica precisa</h2>
+        </div>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <i class="fas fa-calendar-alt feature-icon"></i>
+                <h3>Agenda Online</h3>
+                <p>Gestão de horários em tempo real para médicos e pacientes.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-user-md feature-icon"></i>
+                <h3>Prontuário Digital</h3>
+                <p>Segurança e agilidade no acesso ao histórico clínico completo.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-shield-alt feature-icon"></i>
+                <h3>Segurança Máxima</h3>
+                <p>Proteção integral de dados sensíveis conforme normas de saúde.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="quem-somos" class="about-section">
+        <div class="about-content">
+            <i class="fas fa-graduation-cap about-icon"></i>
+            <h2>Quem Somos</h2>
+            <p>O IntegraMed é fruto de um trabalho colaborativo focado em aplicar tecnologia de ponta para resolver gargalos reais na gestão da saúde brasileira.</p>
+            
+            <div class="univesp-card">
+                <h4>Eixo de Computação & Tecnologia</h4>
+                <p>UNIVESP | Projeto Integrador | Grupo 4</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="logo" style="color: white; justify-content: center; font-size: 20px;">
+            <div class="logo-icon" style="background: white; color: var(--dark); width: 30px; height: 30px; font-size: 13px;">IM</div> 
+            IntegraMed
+        </div>
+        <div class="footer-info">
+            <p>&copy; <span id="ano"></span> Todos os direitos reservados.</p>
+            <p>Desenvolvido para fins acadêmicos - Universidade Virtual do Estado de São Paulo</p>
+        </div>
+    </footer>
+
+    <script>document.getElementById('ano').textContent = new Date().getFullYear();</script>
+</body>
+</html>
