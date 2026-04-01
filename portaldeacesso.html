@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -8,29 +7,35 @@
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2869/2869833.png">
 </head>
 <body class="auth-body">
-    <div class="auth-card">
-        <div class="logo" style="text-align: center; margin-bottom: 20px;">
-            <span style="background: #003366; color: white; padding: 5px 10px; border-radius: 5px; font-weight: bold;">IM</span> 
-            <strong style="color: #003366;">IntegraMed</strong>
-        </div>
-
-        <div id="escolha-inicial">
-            <h3 style="text-align: center; margin-bottom: 20px;">Como deseja acessar?</h3>
-            <button onclick="configurarLogin('medico')" class="auth-btn" style="margin-bottom: 10px;">Sou Médico</button>
-            <button onclick="configurarLogin('paciente')" class="auth-btn" style="background: transparent; border: 2px solid #0047AB; color: #0047AB;">Sou Paciente</button>
-        </div>
-
-        <div id="form-login" style="display: none;">
-            <h3 id="titulo-login" style="text-align: center; margin-bottom: 20px;">Login</h3>
-            <input type="email" id="email" class="auth-input" placeholder="teste@teste">
-            <input type="password" id="senha" class="auth-input" placeholder="123">
-            <button onclick="fazerLoginNovo()" class="auth-btn">Entrar</button>
-            <p style="text-align: center; margin-top: 15px; font-size: 13px;">
-                Não tem conta? <a href="cadastro.html" style="color: #0047AB; text-decoration: none; font-weight: bold;">Cadastre-se aqui</a>
-            </p>
-            <button onclick="location.reload()" style="background: none; border: none; color: #718096; width: 100%; margin-top: 10px; cursor: pointer;">← Voltar</button>
-        </div>
+  <div class="auth-card">
+    <img src="Imagens/PáginaInicial.png" alt="Logo IntegraMed" class="logo-img" style="margin-bottom: 0;">
+    <br>
+    <div id="escolha-inicial" style="width: 100%;">
+        <h3 style="text-align: center; margin-top: 0; margin-bottom: 20px;">Como deseja acessar?</h3>
+        
+        <button onclick="configurarLogin('medico')" class="auth-btn" style="margin-bottom: 10px;">Sou Médico</button>
+        <button onclick="configurarLogin('paciente')" class="auth-btn" style="background: transparent; border: 2px solid #0047AB; color: #0047AB;">Sou Paciente</button>
     </div>
+
+    <div id="form-login" style="display: none; width: 100%;">
+        <h3 id="titulo-login" style="text-align: center; margin-top: 0; margin-bottom: 20px;">Login</h3>
+        
+        <form onsubmit="event.preventDefault(); fazerLoginNovo();">
+            <input type="email" id="email" class="auth-input" placeholder="Seu e-mail (teste@teste)" required>
+            <input type="password" id="senha" class="auth-input" placeholder="Sua senha (123)" required>
+            
+            <button type="submit" class="auth-btn">Entrar</button>
+        </form>
+
+        <p style="text-align: center; margin-top: 15px; font-size: 13px; color: #718096;">
+            Não tem conta? <a href="cadastro.html" style="color: #0047AB; text-decoration: none; font-weight: bold;">Cadastre-se aqui</a>
+        </p>
+        
+        <button class="btn-voltar-sistema" onclick="location.reload()" style="margin-top: 10px;">
+            ← Voltar
+        </button>
+    </div>
+</div>
     <script src="script.js"></script>
 </body>
 </html>

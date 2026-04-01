@@ -2,37 +2,194 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IntegraMed | Área do Paciente</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2869/2869833.png">
+    <style>
+        /* Lógica para esconder/mostrar seções */
+        .secao-paciente { display: none; animation: fadeIn 0.3s ease; }
+        .secao-paciente.ativa { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Seus estilos mantidos */
+        .card-consulta-destaque {
+            background: linear-gradient(135deg, #0047AB 0%, #002e6e 100%);
+            padding: 25px;
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0,71,171,0.2);
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .btn-horario {
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .btn-horario:hover {
+            border-color: #0047AB;
+            background: #f0f7ff;
+        }
+
+        .btn-horario.selecionado {
+            background: #0047AB;
+            color: white;
+            border-color: #0047AB;
+        }
+
+        .doc-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            border: 1px solid #edf2f7;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            transition: background 0.2s;
+        }
+
+        .doc-item:hover { background: #f8fafc; }
+    </style>
 </head>
-<body class="app-container">
+<body class="dashboard-body">
+
     <aside class="sidebar">
-        <div class="logo"><span class="logo-icon">MG</span> IntegraMed</div>
+        <div class="logo-sidebar" style="padding: 20px; text-align: center;">
+            <img src="Imagens/PáginaInicial.png" alt="Logo IntegraMed" style="width: 100%; max-width: 180px;">
+        </div>
         <nav class="nav-menu">
-            <button class="nav-item active"><i class="fas fa-calendar-alt"></i> Meus Agendamentos</button>
-            <button class="nav-item"><i class="fas fa-clock"></i> Horários Livres</button>
-          <button class="nav-item btn-sair" onclick="logout()"> <i class="fas fa-sign-out-alt"></i> Sair</button>
+            <button class="nav-item active" onclick="mostrarSecao('inicio', this)"><i class="fas fa-home"></i> Início</button>
+            <button class="nav-item" onclick="mostrarSecao('consultas', this)"><i class="fas fa-calendar-check"></i> Minhas Consultas</button>
+            <button class="nav-item" onclick="mostrarSecao('documentos', this)"><i class="fas fa-file-medical"></i> Exames e Receitas</button>
+            
+            <div style="margin-top: auto; padding: 20px;">
+                <button class="nav-item btn-sair" onclick="logout()" style="width: 100%; justify-content: center;">
+                    <i class="fas fa-sign-out-alt"></i> Sair
+                </button>
+            </div>
         </nav>
     </aside>
 
     <main class="main-content">
-        <header>
-            <h1>Olá, Paciente </h1>
-            <p>Seja bem-vindo ao seu portal de saúde.</p>
-        </header>
+        
+        <div id="secao-inicio" class="secao-paciente ativa">
+            <header style="margin-bottom: 30px;">
+                <h1 style="color: #2d3748; margin: 0;">Olá, usuário 👋</h1>
+                <p style="color: #718096; margin-top: 5px;">Seu portal de saúde e agendamentos.</p>
+            </header>
 
-        <div class="calendar-card" style="display: block; padding: 30px; height: auto;">
-            <h3>Selecione um horário disponível:</h3>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px;">
-                <button style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; background: white;">09:00</button>
-                <button style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; background: white;">10:00</button>
-                <button style="padding: 15px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; background: #0047AB; color: white;">14:00 (Selecionado)</button>
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 25px;">
+                <div>
+                    <div class="card-consulta-destaque">
+                        <div>
+                            <span style="background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: bold; text-transform: uppercase;">Próximo Atendimento</span>
+                            <h2 style="margin: 10px 0 5px 0;">Dr.(a)</h2>
+                            <p style="margin: 0; opacity: 0.9; font-size: 14px;"><i class="far fa-clock"></i> Amanhã às 09:00 | Cardiologia</p>
+                        </div>
+                        <div style="background: white; color: #0047AB; padding: 12px; border-radius: 12px; text-align: center; min-width: 70px;">
+                            <span style="display: block; font-size: 11px; font-weight: bold; text-transform: uppercase;">Abril</span>
+                            <span style="display: block; font-size: 24px; font-weight: 800;">01</span>
+                        </div>
+                    </div>
+
+                    <div style="background: white; padding: 25px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                        <h3 style="margin-top: 0; color: #2d3748;"><i class="fas fa-calendar-plus" style="color: #0047AB;"></i> Agendar Nova Consulta</h3>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0;">
+                            <button class="btn-horario">08:00</button>
+                            <button class="btn-horario">10:30</button>
+                            <button class="btn-horario selecionado">14:00</button>
+                            <button class="btn-horario">15:00</button>
+                            <button class="btn-horario">16:30</button>
+                            <button class="btn-horario">17:00</button>
+                        </div>
+                        <button onclick="alert('Agendamento solicitado!')" style="width: 100%; background: #0047AB; color: white; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 16px;">
+                            Confirmar Agendamento
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <div style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 20px;">
+                        <h3 style="font-size: 16px; color: #2d3748; margin-bottom: 20px;">Destaques</h3>
+                        <div class="doc-item">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-file-pdf" style="color: #e53e3e;"></i>
+                                <span style="font-size: 13px; font-weight: 600;">Última Receita</span>
+                            </div>
+                            <i class="fas fa-download" style="color: #cbd5e1; cursor: pointer;"></i>
+                        </div>
+                    </div>
+                    <div style="background: #fffaf0; padding: 15px; border-radius: 12px; border: 1px solid #feebc8;">
+                        <h4 style="margin: 0; color: #9c4221; font-size: 14px;"><i class="fas fa-info-circle"></i> Atenção</h4>
+                    <p style="margin: 5px 0 0 0; color: #c05621; font-size: 12px;">Chegue com 15 minutos de antecedência para consultas presenciais.</p>
+                    </div>
+                </div>
             </div>
-            <button class="auth-btn" style="margin-top: 20px; width: 200px;" onclick="alert('Agendado com sucesso!')">Confirmar</button>
         </div>
+
+        <div id="secao-consultas" class="secao-paciente">
+            <header style="margin-bottom: 30px;">
+                <h1 style="color: #2d3748; margin: 0;">Minhas Consultas</h1>
+                <p style="color: #718096; margin-top: 5px;">Histórico de atendimentos e agendamentos.</p>
+            </header>
+            <div style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                <p style="color: #718096; text-align: center; padding: 40px;">Você não possui consultas anteriores finalizadas.</p>
+            </div>
+        </div>
+
+        <div id="secao-documentos" class="secao-paciente">
+            <header style="margin-bottom: 30px;">
+                <h1 style="color: #2d3748; margin: 0;">Exames e Receitas</h1>
+                <p style="color: #718096; margin-top: 5px;">Baixe seus documentos médicos com segurança.</p>
+            </header>
+            <div style="background: white; padding: 25px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); max-width: 800px;">
+                <div class="doc-item">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <i class="fas fa-file-pdf" style="color: #e53e3e; font-size: 24px;"></i>
+                        <div>
+                            <p style="margin: 0; font-weight: bold; color: #2d3748;">Receituário - Março 2026</p>
+                            <small style="color: #718096;">Dr.(a)</small>
+                        </div>
+                    </div>
+                    <button style="border: 1px solid #0047AB; color: #0047AB; background: none; padding: 8px 15px; border-radius: 8px; cursor: pointer;">Baixar</button>
+                </div>
+            </div>
+        </div>
+
     </main>
-    <script src="script.js"></script>
+
+    <script>
+        function mostrarSecao(idSecao, botao) {
+            // Esconder todas as seções
+            document.querySelectorAll('.secao-paciente').forEach(secao => {
+                secao.classList.remove('ativa');
+            });
+            // Mostrar a seção clicada
+            document.getElementById('secao-' + idSecao).classList.add('ativa');
+
+            // Mudar classe 'active' nos botões da sidebar
+            document.querySelectorAll('.nav-item').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            botao.classList.add('active');
+        }
+
+        function logout() { window.location.href = 'portaldeacesso.html'; }
+    </script>
 </body>
 </html>

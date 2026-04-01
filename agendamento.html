@@ -1,61 +1,85 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>IntegraMed | Agendamento</title>
+    <title>IntegraMed | Área de Agendamento</title>
     <link rel="stylesheet" href="temadoportaldeacesso.css">
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2869/2869833.png">
     <style>
-        .grade-horarios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
-        .horario-item { 
-            padding: 10px; border: 1px solid #e0e6ed; border-radius: 6px; 
-            text-align: center; cursor: pointer; font-size: 14px; transition: 0.3s;
+        /* Estilos específicos da grade que só fazem sentido nesta página */
+        .grade-horarios { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); /* 2 colunas para o card estreito */
+            gap: 12px; 
+            margin-top: 20px; 
         }
-        .horario-item:hover { background: #f0f7ff; border-color: #0047AB; }
-        .horario-item.ocupado { background: #f5f5f5; color: #ccc; cursor: not-allowed; border-color: #eee; }
+        .horario-item { 
+            padding: 12px; border: 1px solid #e0e6ed; border-radius: 8px; 
+            text-align: center; cursor: pointer; font-size: 14px; font-weight: 600;
+            color: #4a5568; transition: all 0.2s ease;
+        }
+        .horario-item:hover:not(.ocupado) { background: #f0f7ff; border-color: #0047AB; color: #0047AB; }
+        .horario-item.ocupado { background: #f8fafc; color: #cbd5e0; cursor: not-allowed; text-decoration: line-through; }
     </style>
 </head>
 <body class="auth-body">
 
     <div class="auth-card" id="card-agendamento">
-        <div id="passo-login">
-            <h3 style="text-align: center; margin-bottom: 20px;">Acesse para Agendar</h3>
-            <input type="email" class="auth-input" placeholder="Seu e-mail">
-            <input type="password" class="auth-input" placeholder="Sua senha">
-            <button class="auth-btn" onclick="liberarAgenda()">Entrar e Ver Horários</button>
-            
-            <p style="text-align: center; margin-top: 20px; font-size: 14px; color: #718096;">
-                Não tem cadastro? <a href="cadastro.html" style="color: #0047AB; font-weight: bold; text-decoration: none;">Faça agora</a>
-            </p>
+        
+        <div class="logo-container">
+            <img src="Imagens/PáginaInicial.png" alt="Logo IntegraMed" class="logo-img">
         </div>
 
-        <div id="passo-agenda" style="display: none;">
-            <h3 style="margin-bottom: 10px;">Horários Disponíveis</h3>
-            <p style="font-size: 13px; color: #718096; margin-bottom: 20px;">Olá, selecione o melhor momento para sua consulta:</p>
+        <div class="conteudo-sistema">
             
-            <div class="grade-horarios">
-                <div class="horario-item">08:00</div>
-                <div class="horario-item ocupado">09:00</div> <div class="horario-item">10:00</div>
-                <div class="horario-item">14:00</div>
-                <div class="horario-item">15:00</div>
-                <div class="horario-item ocupado">16:00</div>
+            <div id="passo-login">
+                <h2 class="titulo-sistema">Área de Agendamento</h2>
+                <p class="subtitulo-sistema">Acesse para gerenciar suas consultas</p>
+                
+                <input type="email" class="auth-input" placeholder="Seu e-mail">
+                <input type="password" class="auth-input" placeholder="Sua senha">
+                <button class="auth-btn" onclick="liberarAgenda()">Entrar e Ver Horários</button>
+                
+                <p style="text-align: center; margin-top: 25px; font-size: 13px; color: #718096;">
+                    Não tem cadastro? <a href="cadastro.html" style="color: #0047AB; font-weight: bold; text-decoration: none;">Faça agora</a>
+                </p>
             </div>
 
-            <button class="auth-btn" style="margin-top: 25px;" onclick="confirmar()">Confirmar Agendamento</button>
-            <button onclick="window.location.href='login.html'" style="background:none; border:none; width:100%; margin-top:15px; color:#718096; cursor:pointer; font-size: 12px;">Sair</button>
+            <div id="passo-agenda" style="display: none;">
+                <h2 class="titulo-sistema">Horários Disponíveis</h2>
+                <p class="subtitulo-sistema">Olá, selecione o melhor momento para sua consulta:</p>
+                
+                <div class="grade-horarios">
+                    <div class="horario-item">08:00</div>
+                    <div class="horario-item ocupado">09:00</div> 
+                    <div class="horario-item">10:00</div>
+                    <div class="horario-item">14:00</div>
+                    <div class="horario-item">15:00</div>
+                    <div class="horario-item ocupado">16:00</div>
+                </div>
+
+                <button class="auth-btn" style="margin-top: 30px;" onclick="confirmar()">Confirmar Agendamento</button>
+            </div>
         </div>
+
+        <button onclick="window.location.href='index.html'" class="btn-voltar-sistema">
+         ⬅ Voltar
+        </button>
     </div>
 
     <script>
         function liberarAgenda() {
-            // Aqui o Back-end validaria o usuário. No Front, apenas trocamos a tela:
+            // Transição suave
             document.getElementById('passo-login').style.display = 'none';
             document.getElementById('passo-agenda').style.display = 'block';
-            document.getElementById('card-agendamento').style.width = '500px'; // Aumenta o card para a grade
+            
+            // IMPORTANTE: Removi a linha que alterava a largura para 500px.
+            // O card deve manter sua estética vertical esticada.
         }
         function confirmar() {
             alert('Agendamento solicitado com sucesso!');
-            window.location.href = 'login.html';
+            window.location.href = 'index.html';
         }
     </script>
 </body>

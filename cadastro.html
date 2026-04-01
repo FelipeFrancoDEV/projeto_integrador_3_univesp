@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -8,20 +7,93 @@
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2869/2869833.png">
 </head>
 <body class="auth-body">
-    <div class="auth-card">
-        <h3 style="text-align: center; margin-bottom: 20px;">Criar Nova Conta</h3>
-        <input type="text" class="auth-input" placeholder="Nome Completo">
-        <input type="email" class="auth-input" placeholder="E-mail">
-        <input type="password" class="auth-input" placeholder="Senha">
-        
-        <label style="font-size: 12px; color: #718096;">Tipo de conta:</label>
-        <select class="auth-input">
-            <option>Paciente</option>
-            <option>Médico (Requer CRM)</option>
-        </select>
 
-        <button class="auth-btn" onclick="alert('Cadastro realizado! Use teste@teste e 123 para entrar.')">Cadastrar</button>
-        <a href="portaldeacesso.html" style="display: block; text-align: center; margin-top: 15px; font-size: 13px; color: #718096; text-decoration: none;">Já tenho conta</a>
+    <div class="auth-card">
+        <img src="Imagens/PáginaInicial.png" alt="Logo IntegraMed" class="logo-img">
+        
+        <h3 style="text-align: center; margin-bottom: 20px;">Área de Cadastro</h3>
+        
+        <form onsubmit="event.preventDefault(); alert('Cadastro realizado com sucesso!');">
+            
+            <input type="text" class="auth-input" placeholder="Nome Completo" required>
+            <input type="email" class="auth-input" placeholder="E-mail" required>
+            <input type="password" class="auth-input" placeholder="Senha" required>
+            <input type="tel" class="auth-input" placeholder="Telefone / WhatsApp" required>
+            
+            <input type="text" class="auth-input" placeholder="Rua / Logradouro" required>
+            <div style="display: flex; gap: 10px; width: 100%;">
+                <input type="text" class="auth-input" placeholder="Nº" style="flex: 1;" required>
+                <input type="text" class="auth-input" placeholder="Complemento" style="flex: 2;">
+            </div>
+            
+            <label style="font-size: 12px; color: #718096; margin-bottom: 5px;">Tipo de conta:</label>
+            <select id="tipoConta" class="auth-input" onchange="gerenciarFluxo()" required>
+                <option value="">Selecione...</option>
+                <option value="paciente">Paciente</option>
+                <option value="medico">Médico (Requer CRM)</option>
+            </select>
+
+            <div id="secaoCRM" style="display: none; width: 100%;">
+                <input type="text" id="inputCRM" class="auth-input" placeholder="Número do CRM" style="border-color: #0047AB;">
+            </div>
+
+            <div id="secaoPerguntaConvenio" style="display: none; width: 100%;">
+                <label style="font-size: 12px; color: #718096; margin-bottom: 5px;">Possui convênio médico?</label>
+                <select id="temConvenio" class="auth-input" onchange="gerenciarFluxo()">
+                    <option value="nao">Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div id="detalhesConvenio" style="display: none; width: 100%;">
+                <input type="text" id="nomeConvenio" class="auth-input" placeholder="Qual o seu convênio? (Ex: Unimed)">
+                <input type="text" id="numCarteirinha" class="auth-input" placeholder="Número da Carteirinha">
+            </div>
+
+            <button type="submit" class="auth-btn">Finalizar Cadastro</button>
+        </form>
+        
+        <button onclick="window.location.href='portaldeacesso.html'" class="btn-voltar-sistema" style="margin-top: 15px;">
+            Já possui conta? Clique aqui
+        </button>
     </div>
+
+    <script>
+        function gerenciarFluxo() {
+            const tipoConta = document.getElementById('tipoConta').value;
+            const secaoCRM = document.getElementById('secaoCRM');
+            const secaoPerguntaConvenio = document.getElementById('secaoPerguntaConvenio');
+            const detalhesConvenio = document.getElementById('detalhesConvenio');
+            const temConvenio = document.getElementById('temConvenio').value;
+
+            // Inputs para validação required
+            const inputCRM = document.getElementById('inputCRM');
+            const nomeConvenio = document.getElementById('nomeConvenio');
+            const numCarteirinha = document.getElementById('numCarteirinha');
+
+            // Reset inicial
+            secaoCRM.style.display = 'none';
+            secaoPerguntaConvenio.style.display = 'none';
+            detalhesConvenio.style.display = 'none';
+            inputCRM.required = false;
+            nomeConvenio.required = false;
+            numCarteirinha.required = false;
+
+            if (tipoConta === 'medico') {
+                secaoCRM.style.display = 'block';
+                inputCRM.required = true;
+            } 
+            else if (tipoConta === 'paciente') {
+                secaoPerguntaConvenio.style.display = 'block';
+                
+                if (temConvenio === 'sim') {
+                    detalhesConvenio.style.display = 'block';
+                    nomeConvenio.required = true;
+                    numCarteirinha.required = true;
+                }
+            }
+        }
+    </script>
+
 </body>
 </html>

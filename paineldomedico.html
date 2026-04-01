@@ -1,78 +1,351 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IntegraMed IM | Sistema de Clínicas</title>
+    <title>IntegraMed | Painel de Gestão Médica</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2869/2869833.png">
+    <style>
+        /* Estilo do Modal (Janela de Agendamento) */
+        .modal-agendar {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content-agendar {
+            background-color: white;
+            margin: 10% auto;
+            padding: 25px;
+            border-radius: 12px;
+            width: 350px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        /* --- ESTILOS NOVOS PARA SEÇÃO DE PACIENTES --- */
+        .container-pacientes {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+            border: 1px solid #edf2f7;
+        }
+        .tabela-header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #edf2f7;
+        }
+        .busca-paciente {
+            padding: 10px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            width: 300px;
+            outline: none;
+        }
+        .tabela-moderna {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        .tabela-moderna th {
+            background: #f8fafc;
+            padding: 15px;
+            color: #718096;
+            font-size: 13px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #edf2f7;
+        }
+        .tabela-moderna td {
+            padding: 15px;
+            border-bottom: 1px solid #edf2f7;
+            color: #2d3748;
+            font-size: 14px;
+        }
+        .tabela-moderna tr:hover { background: #f7fafc; }
+        
+        .badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .badge-convenio { background: #ebf8ff; color: #3182ce; }
+        .badge-particular { background: #fefcbf; color: #b7791f; }
+        
+        .btn-tabela {
+            background: none;
+            border: none;
+            color: #4a5568;
+            cursor: pointer;
+            padding: 5px;
+            margin: 0 5px;
+            transition: color 0.2s;
+        }
+        .btn-tabela:hover { color: #0047AB; }
+    </style>
 </head>
 
-<body onload="verificarSessao()"> 
+<body class="dashboard-body" onload="verificarSessao()"> 
 
     <aside class="sidebar">
-        <div class="logo"><span class="logo-icon">MG</span> IntegraMed</div>
+        <div class="logo-sidebar" style="padding: 20px; text-align: center;">
+            <img src="Imagens/PáginaInicial.png" alt="Logo IntegraMed" style="width: 100%; max-width: 180px;">
+        </div>
         <nav class="nav-menu">
-            <button class="nav-item active" onclick="navegar('agenda')">
-                <i class="fas fa-calendar"></i> Agenda
+            <button class="nav-item active" id="btn-painel" onclick="navegar('painel')">
+                <i class="fas fa-home"></i> Início / Agenda
             </button>
-            <button class="nav-item" onclick="navegar('financeiro')">
-                <i class="fas fa-wallet"></i> Financeiro
+            <button class="nav-item" id="btn-pacientes" onclick="navegar('pacientes')">
+                <i class="fas fa-users"></i> Meus Pacientes
             </button>
-            <button class="nav-item" onclick="navegar('pacientes')">
-                <i class="fas fa-user-md"></i> Pacientes
+            <button class="nav-item" id="btn-financeiro" onclick="navegar('financeiro')">
+                <i class="fas fa-chart-line"></i> Desempenho
             </button>
-          <button class="nav-item btn-sair" onclick="logout()">
-            <i class="fas fa-sign-out-alt"></i> Sair
-           </button>
+            
+            <div style="margin-top: auto; padding: 20px;">
+                <button class="nav-item btn-sair" onclick="logout()" style="width: 100%; justify-content: center;">
+                    <i class="fas fa-sign-out-alt"></i> Sair
+                </button>
+            </div>
         </nav>
     </aside>
-        <main class="main-content">
-            <header class="header-medico">
-                <div>
-                    <h1 id="saudacao-texto">Bem-vindo Dr.(a)!!!</h1>
-                    <div class="badge-info">
-                        <span id="info-espec">Especialidade</span> | <span id="info-crm">CRM 000000</span>
+
+    <main class="main-content">
+        <header class="header-medico" style="display: flex; justify-content: space-between; align-items: center; padding: 20px; background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+            <div>
+                <h1 id="saudacao-texto" style="margin: 0; font-size: 24px; color: #2d3748;">Olá, Dr.(a)</h1>
+                <p style="color: #718096; margin: 5px 0 0 0;"><span id="info-espec">Cardiologia</span> | <span id="info-crm">CRM 123456</span></p>
+            </div>
+            <button class="btn-action" onclick="abrirModal()" style="background: #0047AB; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-plus"></i> Novo Agendamento
+            </button>
+        </header>
+
+        <div id="secao-painel">
+            <div class="stats-container" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 25px;">
+                <div class="stat-box" style="background: white; padding: 20px; border-radius: 12px; border-left: 5px solid #0047AB;">
+                    <span style="display: block; color: #718096; font-size: 14px;">Agendados hoje</span>
+                    <strong style="font-size: 24px; color: #2d3748;">12</strong>
+                </div>
+                <div class="stat-box" style="background: white; padding: 20px; border-radius: 12px; border-left: 5px solid #38a169;">
+                    <span style="display: block; color: #718096; font-size: 14px;">Confirmados</span>
+                    <strong style="font-size: 24px; color: #38a169;">8</strong>
+                </div>
+                <div class="stat-box" style="background: white; padding: 20px; border-radius: 12px; border-left: 5px solid #e53e3e;">
+                    <span style="display: block; color: #718096; font-size: 14px;">Faltas</span>
+                    <strong style="font-size: 24px; color: #e53e3e;">1</strong>
+                </div>
+                <div class="stat-box" style="background: white; padding: 20px; border-radius: 12px; border-left: 5px solid #ecc94b;">
+                    <span style="display: block; color: #718096; font-size: 14px;">Aguardando na sala</span>
+                    <strong style="font-size: 24px; color: #ecc94b;">2</strong>
+                </div>
+            </div>
+
+            <div class="dashboard-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 25px; margin-top: 25px;">
+                <div class="calendar-card" style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                    <h3 style="margin-bottom: 20px; color: #2d3748;"><i class="fas fa-clock" style="color: #0047AB;"></i> Cronograma do Dia</h3>
+                    <div class="schedule-container" id="lista-agenda" style="position: relative; border-top: 1px solid #edf2f7;">
+                        <div style="display: flex; align-items: center; padding: 15px 0; border-bottom: 1px solid #edf2f7;">
+                            <span style="width: 80px; font-weight: bold; color: #4a5568;">09:00</span>
+                            <div style="flex: 1; padding: 10px; background: #ebf8ff; border-radius: 8px; border-left: 4px solid #4299e1;">
+                                <strong style="color: #2b6cb0;">Paciente: João Silva</strong> - Particular
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; padding: 15px 0; border-bottom: 1px solid #edf2f7;">
+                            <span style="width: 80px; font-weight: bold; color: #4a5568;">10:00</span>
+                            <div style="flex: 1; padding: 10px; background: #f0fff4; border-radius: 8px; border-left: 4px solid #48bb78;">
+                                <strong style="color: #2f855a;">Paciente: Maria Santos</strong> - Unimed
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <button class="btn-action" style="background: var(--primary-blue); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold;">+ Novo Agendamento</button>
-            </header>
 
-           <h2 style="margin-top: 20px; color: #4a5568;"> Compromissos de Hoje - <span id="data-atual" style="color: var(--primary-blue);"></span></h2>
-
-            <div class="calendar-card">
-                <div class="time-gutter">
-                    <div class="hour-label">08:00</div>
-                    <div class="hour-label">09:00</div>
-                    <div class="hour-label">10:00</div>
-                    <div class="hour-label">11:00</div>
-                    <div class="hour-label">12:00</div>
-                    <div class="hour-label">13:00</div>
-                    <div class="hour-label">14:00</div>
-                    <div class="hour-label">15:00</div>
-                    <div class="hour-label">16:00</div>
-                    <div class="hour-label">17:00</div>
-                </div>
-
-                <div class="schedule-grid" id="grid-consultas">
-                    <div id="linha-tempo" class="now-line"></div>
-                    
-                    <div class="appointment-block blue" style="top: 60px; height: 60px;">
-                        <span class="appt-time">09:00 - 10:00</span>
-                        <span class="appt-name"> Nome do Paciente </span>
-                    </div>
-
-                    <div class="appointment-block green" style="top: 180px; height: 90px;">
-                        <span class="appt-time">11:00 - 12:30</span>
-                        <span class="appt-name"> Nome do Paciente - Retorno </span>
+                <div class="management-card" style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                    <h3 style="margin-bottom: 20px; color: #2d3748;"><i class="fas fa-stethoscope" style="color: #0047AB;"></i> Sala de Espera</h3>
+                    <div class="waiting-list">
+                        <div style="padding: 15px; border: 1px solid #edf2f7; border-radius: 10px; margin-bottom: 10px;">
+                            <p style="margin: 0; font-weight: bold;">Ana Paula R.</p>
+                            <small style="color: #718096;">Chegou às 09:45</small>
+                            <button style="width: 100%; margin-top: 10px; background: #38a169; color: white; border: none; padding: 8px; border-radius: 6px; cursor: pointer;">Chamar Agora</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
+
+        <div id="secao-pacientes" style="display: none; margin-top: 25px;">
+            <div class="container-pacientes">
+                <div class="tabela-header">
+                    <h3 style="margin:0; color:#2d3748;"><i class="fas fa-users" style="color: #0047AB;"></i> Meus Pacientes</h3>
+                    <input type="text" class="busca-paciente" placeholder="🔍 Buscar por nome ou CPF...">
+                </div>
+                <table class="tabela-moderna">
+                    <thead>
+                        <tr>
+                            <th>Nome do Paciente</th>
+                            <th>Contato</th>
+                            <th>Plano/Convênio</th>
+                            <th>Última Consulta</th>
+                            <th style="text-align: center;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: 600;">Adriana Lins</td>
+                            <td>(11) 98888-7777</td>
+                            <td><span class="badge badge-convenio">Unimed Full</span></td>
+                            <td>12/03/2024</td>
+                            <td style="text-align: center;">
+                                <button class="btn-tabela" title="Ver Prontuário"><i class="fas fa-file-medical"></i></button>
+                                <button class="btn-tabela" title="Editar"><i class="fas fa-edit"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">Carlos Eduardo</td>
+                            <td>(11) 91234-5678</td>
+                            <td><span class="badge badge-particular">Particular</span></td>
+                            <td>28/02/2024</td>
+                            <td style="text-align: center;">
+                                <button class="btn-tabela" title="Ver Prontuário"><i class="fas fa-file-medical"></i></button>
+                                <button class="btn-tabela" title="Editar"><i class="fas fa-edit"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+       <div id="secao-financeiro" style="display: none; margin-top: 25px;">
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
+        
+        <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border-top: 4px solid #38a169;">
+            <div style="display: flex; justify-content: space-between; align-items: start;">
+                <div>
+                    <p style="margin: 0; color: #718096; font-size: 14px; font-weight: 600;">Faturamento Mensal</p>
+                    <h2 style="margin: 10px 0 5px 0; color: #2d3748; font-size: 28px;">R$ 18.500,00</h2>
+                    <span style="color: #38a169; font-size: 12px; font-weight: bold;">
+                        <i class="fas fa-arrow-up"></i> +12% <span style="font-weight: normal; color: #a0aec0;">vs mês anterior</span>
+                    </span>
+                </div>
+                <div style="background: #f0fff4; pading: 12px; border-radius: 10px; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-dollar-sign" style="color: #38a169; font-size: 20px;"></i>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border-top: 4px solid #0047AB;">
+            <div style="display: flex; justify-content: space-between; align-items: start;">
+                <div>
+                    <p style="margin: 0; color: #718096; font-size: 14px; font-weight: 600;">Consultas Realizadas</p>
+                    <h2 style="margin: 10px 0 5px 0; color: #2d3748; font-size: 28px;">54</h2>
+                    <span style="color: #718096; font-size: 12px;">Média de <strong>2.5</strong> atendimentos/dia</span>
+                </div>
+                <div style="background: #ebf8ff; width: 45px; height: 45px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-user-check" style="color: #0047AB; font-size: 20px;"></i>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border-top: 4px solid #ecc94b;">
+            <div style="display: flex; justify-content: space-between; align-items: start;">
+                <div>
+                    <p style="margin: 0; color: #718096; font-size: 14px; font-weight: 600;">Ticket Médio</p>
+                    <h2 style="margin: 10px 0 5px 0; color: #2d3748; font-size: 28px;">R$ 342,59</h2>
+                    <span style="color: #718096; font-size: 12px;">Valor médio por consulta</span>
+                </div>
+                <div style="background: #fffaf0; width: 45px; height: 45px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-chart-line" style="color: #ecc94b; font-size: 20px;"></i>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); height: 300px; display: flex; align-items: center; justify-content: center; flex-direction: column; border: 2px dashed #e2e8f0;">
+        <i class="fas fa-chart-bar" style="font-size: 40px; color: #cbd5e1; margin-bottom: 10px;"></i>
+        <p style="color: #94a3b8; font-weight: 500;">Análise de Faturamento por Convênio (Gráfico)</p>
+        <small style="color: #cbd5e1;">Área reservada para integração com Chart.js</small>
+    </div>
+</div>
+    </main>
+
+    <div id="modalAgendamento" class="modal-agendar">
+        <div class="modal-content-agendar">
+            <h3 style="color: #2d3748; margin-bottom: 15px;">Agendar Paciente</h3>
+            <label style="font-size: 14px; color: #718096;">Nome do Paciente</label>
+            <input type="text" id="novoNome" class="form-input" placeholder="Ex: Ana Maria">
+            <label style="font-size: 14px; color: #718096;">Horário</label>
+            <input type="time" id="novoHorario" class="form-input">
+            
+            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                <button onclick="salvarNovoAgendamento()" style="flex: 1; background: #38a169; color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold;">Salvar</button>
+                <button onclick="fecharModal()" style="flex: 1; background: #e53e3e; color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold;">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function abrirModal() { document.getElementById('modalAgendamento').style.display = 'block'; }
+        function fecharModal() { document.getElementById('modalAgendamento').style.display = 'none'; }
+
+        function salvarNovoAgendamento() {
+            const nome = document.getElementById('novoNome').value;
+            const hora = document.getElementById('novoHorario').value;
+            if (nome && hora) {
+                const lista = document.getElementById('lista-agenda');
+                const novoItem = `
+                    <div style="display: flex; align-items: center; padding: 15px 0; border-bottom: 1px solid #edf2f7;">
+                        <span style="width: 80px; font-weight: bold; color: #4a5568;">${hora}</span>
+                        <div style="flex: 1; padding: 10px; background: #fefcbf; border-radius: 8px; border-left: 4px solid #ecc94b;">
+                            <strong style="color: #b7791f;">Paciente: ${nome}</strong> - Novo Agendamento
+                        </div>
+                    </div>
+                `;
+                lista.innerHTML += novoItem;
+                fecharModal();
+                document.getElementById('novoNome').value = "";
+                document.getElementById('novoHorario').value = "";
+            } else {
+                alert("Por favor, preencha o nome e o horário!");
+            }
+        }
+
+        function navegar(destino) {
+            document.getElementById('secao-painel').style.display = 'none';
+            document.getElementById('secao-pacientes').style.display = 'none';
+            document.getElementById('secao-financeiro').style.display = 'none';
+
+            const botoes = document.querySelectorAll('.nav-item');
+            botoes.forEach(btn => btn.classList.remove('active'));
+
+            if (destino === 'painel') {
+                document.getElementById('secao-painel').style.display = 'block';
+                document.getElementById('btn-painel').classList.add('active');
+            } else if (destino === 'pacientes') {
+                document.getElementById('secao-pacientes').style.display = 'block';
+                document.getElementById('btn-pacientes').classList.add('active');
+            } else if (destino === 'financeiro') {
+                document.getElementById('secao-financeiro').style.display = 'block';
+                document.getElementById('btn-financeiro').classList.add('active');
+            }
+        }
+
+        function verificarSessao() { console.log("Painel carregado com sucesso."); }
+        function logout() { window.location.href = 'portaldeacesso.html'; }
+    </script>
 </body>
 </html>
