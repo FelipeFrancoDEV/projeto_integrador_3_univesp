@@ -7,8 +7,10 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #001a3d; 
-    background: radial-gradient(circle at center, #002b5c 0%, #001529 100%);
+    background:
+        linear-gradient(rgba(10, 35, 66, 0.28), rgba(10, 35, 66, 0.28)),
+        url('/Imagens/background.png') center center / cover no-repeat;
+    background-attachment: fixed;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -87,13 +89,13 @@
 }
 
 .auth-input:focus {
-    border-color: #0047AB;
+    border-color: #007B9A;
     background-color: #fff;
 }
 
 .auth-btn {
     width: 100%;
-    background-color: #0047AB;
+    background-color: #007B9A;
     color: white;
     border: none;
     padding: 16px;
@@ -106,7 +108,7 @@
 }
 
 .auth-btn:hover {
-    background-color: #003580;
+    background-color: #006b85;
 }
 
 /* Títulos e Subtítulos padrão do Sistema */

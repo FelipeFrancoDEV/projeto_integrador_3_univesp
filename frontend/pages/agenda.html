@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda Dinâmica</title>
+    <link rel="shortcut icon" type="image/png" href="/Imagens/favicon_32.png?v=2">
+    <link rel="icon" type="image/png" sizes="48x48" href="/Imagens/favicon_48.png?v=2">
+    <link rel="icon" type="image/png" sizes="32x32" href="/Imagens/favicon_32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/Imagens/favicon_16.png?v=2">
+    <link rel="apple-touch-icon" sizes="180x180" href="/Imagens/apple-touch-icon.png?v=2">
+    <meta name="theme-color" content="#007B9A">
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css' rel='stylesheet' />
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+                /* Aumentar largura das colunas do calendário */
+                .fc .fc-timegrid-col,
+                .fc .fc-daygrid-day,
+                .fc .fc-col-header-cell {
+                    min-width: 140px;
+                    max-width: 220px;
+                }
+                .fc .fc-timegrid-cols {
+                    min-width: 1000px;
+                }
+                /* Permitir rolagem horizontal se necessário */
+                #calendar {
+                    overflow-x: auto;
+                }
+        body {
+            background:
+                linear-gradient(rgba(10, 35, 66, 0.28), rgba(10, 35, 66, 0.28)),
+                url('/Imagens/background.png') center center / cover no-repeat;
+            background-attachment: fixed;
+        }
+        .agenda-container { max-width: 98vw; margin: 18px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 16px rgba(25,118,210,0.07); padding: 18px 18px 8px 18px; }
+        #calendar { background: #fff; border-radius: 8px; box-shadow: 0 2px 16px rgba(25,118,210,0.07); padding: 8px; }
+        /* FullCalendar custom */
+        .fc .fc-toolbar-title {
+            font-size: 1.35rem;
+            color: #222;
+            font-weight: 600;
+        }
+        .fc .fc-button {
+            background: #f7fafd;
+            color: #1976d2;
+            border: 1px solid #d0d7e2;
+            border-radius: 6px;
+            font-weight: 500;
+            box-shadow: none;
+            margin: 0 2px;
+            transition: background 0.15s, color 0.15s;
+        }
+        .fc .fc-button.fc-button-active, .fc .fc-button:focus, .fc .fc-button:hover {
+            background: #1976d2;
+            color: #fff;
+            border-color: #1976d2;
+        }
+        .fc .fc-button-group > .fc-button {
+            margin-right: 4px;
+        }
+        .fc .fc-col-header-cell {
+            background: #fff;
+            color: #1976d2;
+            font-weight: 600;
+            border-bottom: 2px solid #e0e0e0;
+            font-size: 1.08em;
+        }
+        .fc .fc-daygrid-day-number, .fc .fc-timegrid-slot-label {
+            color: #1976d2;
+            font-weight: 500;
+        }
+        .fc .fc-day-today {
+            background: #f5faff !important;
+        }
+        .fc .fc-event {
+            border-radius: 7px;
+            border: none;
+            font-size: 1em;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(25,118,210,0.07);
+        }
+        .fc .fc-timegrid-slot {
+            height: 32px !important;
+        }
+        .fc .fc-timegrid-axis-cushion {
+            color: #888;
+            font-size: 0.98em;
+        }
+        .fc .fc-scrollgrid-section-header td {
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .fc .fc-scrollgrid-section-body td {
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .fc .fc-daygrid-day.fc-day-today {
+            background: #f5faff !important;
+        }
+        .fc .fc-highlight {
+            background: #e3edfa !important;
+        }
+        .fc .fc-daygrid-event-dot {
+            border-color: #1976d2;
+        }
+        .fc .fc-toolbar.fc-header-toolbar {
+            margin-bottom: 18px;
+        }
+    </style>
+</head>
+<body>
+    <img src="/static/assets/clivra-logo-header.png" alt="Clivra Logo" style="height: 48px; margin: 18px 0 8px 18px; display: block;" />
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <h2>Pacientes do dia</h2>
+            <div class="sidebar-date" id="sidebar-date"></div>
+            <ul id="lista-pacientes">
+                <!-- Pacientes do dia serão inseridos aqui via JS -->
+            </ul>
+        </aside>
+        <main>
+            <h1 style="font-size:1.25rem;color:#1976d2;margin-bottom:8px;">Rafael Miranda</h1>
+            <form onsubmit="return false;" style="max-width:420px;margin-bottom:18px;">
+                <input type="text" id="busca-paciente" placeholder="Busque um paciente" style="width:80%;padding:8px 12px;border:1px solid #d0d7e2;border-radius:4px;font-size:1rem;">
+                <button type="submit" style="background:none;border:none;cursor:pointer;vertical-align:middle;"><span style="font-size:1.3em;color:#789;">&#128269;</span></button>
+            </form>
+            <div id='calendar'></div>
+        </main>
+    </div>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+    <script src="/static/js/agenda.js"></script>
+</body>
+</html>

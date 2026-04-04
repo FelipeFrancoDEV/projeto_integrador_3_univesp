@@ -6,7 +6,12 @@
     <title>AlfraMed | UNIVESP</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2869/2869833.png">
+    <link rel="shortcut icon" type="image/png" href="/Imagens/favicon_32.png?v=2">
+    <link rel="icon" type="image/png" sizes="48x48" href="/Imagens/favicon_48.png?v=2">
+    <link rel="icon" type="image/png" sizes="32x32" href="/Imagens/favicon_32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/Imagens/favicon_16.png?v=2">
+    <link rel="apple-touch-icon" sizes="180x180" href="/Imagens/apple-touch-icon.png?v=2">
+    <meta name="theme-color" content="#007B9A">
     
     <style>
         :root {
@@ -15,24 +20,36 @@
             --text-main: #2d3748;
             --text-light: #718096;
             --bg-soft: #f8fafc;
+            --header-height: 88px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background: white; color: var(--text-main); line-height: 1.6; overflow-x: hidden; scroll-behavior: smooth; }
+        body {
+            background:
+                linear-gradient(rgba(10, 35, 66, 0.28), rgba(10, 35, 66, 0.28)),
+                url('Imagens/background.png') center center / cover no-repeat;
+            background-attachment: fixed;
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            padding-top: var(--header-height);
+        }
 
         /* --- NAVBAR --- */
         .navbar {
             display: flex; justify-content: space-between; align-items: center;
             padding: 20px 8%; background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px); position: fixed; width: 100%; top: 0; z-index: 2000;
-            border-bottom: 1px solid #eee;
+            border-bottom: none;
         }
-        .logo { font-weight: 800; font-size: 24px; color: var(--dark); display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo { font-weight: 800; font-size: 24px; color: #007B9A; display: flex; align-items: center; gap: 10px; text-decoration: none; }
         .logo-icon { background: var(--dark); color: white; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-size: 16px; }
+        .logo-image { height: 42px; width: auto; display: block; }
 
         .nav-menu { display: flex; gap: 35px; list-style: none; }
-        .nav-link { text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 14px; transition: 0.3s; }
-        .nav-link:hover { color: var(--primary); }
+        .nav-link { text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 16px; transition: 0.3s; }
+        .nav-link:hover { color: #007B9A; }
 
         /* Estilo para as bandeiras ao lado do botão */
         .nav-right { display: flex; align-items: center; gap: 20px; }
@@ -41,15 +58,15 @@
         .lang-btn:hover { transform: scale(1.1); opacity: 1; }
 
         .btn-login { 
-            background: transparent; color: var(--primary); padding: 10px 22px; border-radius: 50px; 
-            text-decoration: none; font-weight: 700; font-size: 14px; border: 2px solid var(--primary); transition: 0.3s;
+            background: transparent; color: #ae061f; padding: 10px 22px; border-radius: 12px; 
+            text-decoration: none; font-weight: 700; font-size: 14px; border: 2px solid #ae061f; transition: 0.3s;
         }
-        .btn-login:hover { background: var(--primary); color: white; }
+        .btn-login:hover { background: #ae061f; border-color: #ae061f; color: white; }
 
         /* --- HERO FULL BACKGROUND --- */
         .hero {
-            height: 100vh; width: 100%; display: flex; align-items: center; padding: 0 8%;
-            background-image: url('Imagens/PáginaInicial.png');
+            height: calc(100vh - var(--header-height)); width: 100%; display: flex; align-items: center; padding: 0 8%; margin-top: -2px;
+            background-image: url('Imagens/pagina_inicial.png');
             background-size: cover; background-position: center right; background-repeat: no-repeat; position: relative;
         }
         .hero::before {
@@ -57,30 +74,30 @@
             background: linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.4) 100%);; z-index: 1;
         }
         .hero-content { position: relative; z-index: 2; max-width: 650px; }
-        .hero-content h1 { font-size: 64px; font-weight: 800; line-height: 1.1; color: var(--dark); margin-bottom: 20px; letter-spacing: -2px; }
-        .hero-content h1 span { color: var(--primary); }
-        .hero-content p { color:#003366 ;font-size: 20px; margin-bottom: 40px;text-align: justify;}
+        .hero-content h1 { font-size: 64px; font-weight: 800; line-height: 1.1; color: #007B9A; margin-bottom: 20px; letter-spacing: -2px; }
+        .hero-content h1 span { color: #007B9A; }
+        .hero-content p { color:#000000 ;font-size: 20px; margin-bottom: 40px;text-align: justify;}
 
         .btn-main {
-            padding: 18px 45px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 18px; transition: 0.3s;
-            background: var(--primary); color: white; display: inline-block; box-shadow: 0 10px 25px rgba(0, 71, 171, 0.3);
+            padding: 18px 45px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 18px; transition: 0.3s;
+            background: #007B9A; color: white; display: inline-block; box-shadow: 0 10px 25px rgba(0, 123, 154, 0.3);
         }
         .btn-main:hover { transform: translateY(-3px); }
 
         /* --- RECURSOS --- */
-        .features { padding: 100px 8%; background: var(--bg-soft); }
+        .features { padding: 0 8% 100px; background: var(--bg-soft); }
         .section-header { text-align: center; margin-bottom: 60px; }
-        .section-header h2 { font-size: 36px; font-weight: 800; color: var(--dark); }
+        .section-header h2 { font-size: 36px; font-weight: 800; color: #007B9A; }
 
         .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .feature-card { background: white; padding: 40px; border-radius: 24px; transition: 0.4s; border: 1px solid #edf2f7; }
-        .feature-icon { font-size: 32px; color: var(--primary); margin-bottom: 20px; }
+        .feature-card { background: white; padding: 40px; border-radius: 24px; transition: 0.4s; border: 2px solid #ae061f; }
+        .feature-icon { font-size: 32px; color: #007B9A; margin-bottom: 20px; }
 
         /* --- QUEM SOMOS --- */
         .about-section { padding: 100px 8%; background: white; text-align: center; }
         .about-content { max-width: 800px; margin: 0 auto; }
-        .about-icon { font-size: 50px; color: var(--dark); margin-bottom: 20px; }
-        .about-content h2 { font-size: 36px; color: var(--dark); margin-bottom: 20px; }
+        .about-icon { font-size: 50px; color: #007B9A; margin-bottom: 20px; }
+        .about-content h2 { font-size: 36px; color: #007B9A; margin-bottom: 20px; }
         .about-content p { color: var(--text-light); font-size: 18px; margin-bottom: 30px; text-align: justify;}
    
         
@@ -89,18 +106,18 @@
             border-top: 5px solid var(--primary); display: inline-block; text-align: center;
             box-shadow: 0 10px 20px rgba(0,0,0,0.02);
         }
-        .univesp-card h4 { color: var(--dark); margin-bottom: 8px; font-size: 22px; }
-        .univesp-card p { margin-bottom: 0; font-size: 16px; color: var(--primary); font-weight: 700; text-align: center; }
+        .univesp-card h4 { color: #007B9A; margin-bottom: 8px; font-size: 22px; }
+        .univesp-card p { margin-bottom: 0; font-size: 16px; color: #007B9A; font-weight: 700; text-align: center; }
 
         /* --- FOOTER --- */
-        footer { padding: 40px 8%; background: var(--dark); color: white; text-align: center; }
+        footer { padding: 40px 8%; background: #007B9A; color: white; text-align: center; }
         .footer-info { opacity: 0.7; font-size: 13px; margin-top: 15px; }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <a href="#" class="logo"><div class="logo-icon">AM</div> AlfraMed</a>
+        <a href="#" class="logo"><img src="Imagens/logo_alframed_red.png" alt="Logo AlfraMed" class="logo-image"></a>
         <ul class="nav-menu">
             <li><a href="#" class="nav-link">Home</a></li>
             <li><a href="#recursos" class="nav-link">Recursos</a></li>
@@ -165,9 +182,8 @@
     </section>
 
     <footer>
-        <div class="logo" style="color: white; justify-content: center; font-size: 20px;">
-            <div class="logo-icon" style="background: white; color: var(--dark); width: 30px; height: 30px; font-size: 13px;">AM</div> 
-            AlfraMed
+        <div style="display: flex; justify-content: center;">
+            <img src="Imagens/logo_alframed_white.png" alt="Logo AlfraMed" style="height: 32px; width: auto; display: block;">
         </div>
         <div class="footer-info">
             <p>&copy; <span id="ano"></span> Todos os direitos reservados.</p>

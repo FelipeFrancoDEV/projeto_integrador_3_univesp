@@ -6,7 +6,12 @@
     <title>AlfraMed | Painel de Gestão Médica</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2869/2869833.png">
+    <link rel="shortcut icon" type="image/png" href="/Imagens/favicon_32.png?v=2">
+    <link rel="icon" type="image/png" sizes="48x48" href="/Imagens/favicon_48.png?v=2">
+    <link rel="icon" type="image/png" sizes="32x32" href="/Imagens/favicon_32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/Imagens/favicon_16.png?v=2">
+    <link rel="apple-touch-icon" sizes="180x180" href="/Imagens/apple-touch-icon.png?v=2">
+    <meta name="theme-color" content="#007B9A">
     <style>
         /* Estilo do Modal (Janela de Agendamento) */
         .modal-agendar {
@@ -96,6 +101,85 @@
             transition: color 0.2s;
         }
         .btn-tabela:hover { color: #0047AB; }
+
+        /* Sidebar clara para padrao visual com o painel do paciente */
+        .sidebar {
+            background: #ffffff;
+            color: #1f2937;
+            border-right: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-sidebar {
+            padding: 28px 20px 18px !important;
+            text-align: center;
+        }
+
+        .nav-menu {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 8px 16px 20px;
+        }
+
+        .nav-item {
+            width: 100%;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            background: transparent;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        .nav-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .nav-item:hover {
+            background: #eef2f7;
+            color: #334155;
+            border-color: #007B9A;
+        }
+
+        .nav-item.active,
+        .nav-item.active:hover {
+            background: #007B9A;
+            color: #ffffff;
+        }
+
+        .menu-bottom {
+            margin-top: auto;
+            padding: 18px 14px 8px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-sair {
+            width: auto !important;
+            justify-content: center;
+            color: #ae061f;
+            background: transparent;
+            border-color: #ae061f;
+            margin-bottom: 0;
+            padding: 10px 14px;
+            font-size: 16px;
+        }
+
+        .btn-sair:hover {
+            background: #ae061f;
+            color: #ffffff;
+            border-color: #ae061f;
+        }
     </style>
 </head>
 
@@ -103,7 +187,7 @@
 
     <aside class="sidebar">
         <div class="logo-sidebar" style="padding: 20px; text-align: center;">
-            <img src="Imagens/PáginaInicial.png" alt="Logo AlfraMed" style="width: 100%; max-width: 180px;">
+            <img src="Imagens/logo_alframed_blue.png" alt="Logo AlfraMed" style="width: 100%; max-width: 180px;">
         </div>
         <nav class="nav-menu">
             <button class="nav-item active" id="btn-painel" onclick="navegar('painel')">
@@ -116,8 +200,8 @@
                 <i class="fas fa-chart-line"></i> Desempenho
             </button>
             
-            <div style="margin-top: auto; padding: 20px;">
-                <button class="nav-item btn-sair" onclick="logout()" style="width: 100%; justify-content: center;">
+            <div class="menu-bottom">
+                <button class="nav-item btn-sair" onclick="logout()">
                     <i class="fas fa-sign-out-alt"></i> Sair
                 </button>
             </div>
@@ -130,7 +214,7 @@
                 <h1 id="saudacao-texto" style="margin: 0; font-size: 24px; color: #2d3748;">Olá, Dr.(a)</h1>
                 <p style="color: #718096; margin: 5px 0 0 0;"><span id="info-espec">Cardiologia</span> | <span id="info-crm">CRM 123456</span></p>
             </div>
-            <button class="btn-action" onclick="abrirModal()" style="background: #0047AB; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 8px;">
+            <button class="btn-action" onclick="abrirModal()" style="background: #007B9A; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 8px;">
                 <i class="fas fa-plus"></i> Novo Agendamento
             </button>
         </header>

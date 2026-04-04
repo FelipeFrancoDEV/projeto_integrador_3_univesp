@@ -9,7 +9,14 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
 
-body { background: var(--bg-light); display: flex; height: 100vh; }
+body.dashboard-body {
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.42)),
+        url('Imagens/background_white.png') center center / cover no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    height: 100vh;
+}
 
 /* LAYOUT ESTRUTURAL */
 
