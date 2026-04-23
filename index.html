@@ -14,6 +14,7 @@
     <meta name="theme-color" content="#007B9A">
     
     <style>
+
         :root {
             --primary: #0047AB;
             --dark: #003366;
@@ -37,6 +38,7 @@
         }
 
         /* --- NAVBAR --- */
+
         .navbar {
             display: flex; justify-content: space-between; align-items: center;
             padding: 20px 8%; background: rgba(255, 255, 255, 0.95);
@@ -64,6 +66,7 @@
         .btn-login:hover { background: #ae061f; border-color: #ae061f; color: white; }
 
         /* --- HERO FULL BACKGROUND --- */
+
         .hero {
             height: calc(100vh - var(--header-height)); width: 100%; display: flex; align-items: center; padding: 0 8%; margin-top: -2px;
             background-image: url('Imagens/pagina_inicial.png');
@@ -85,6 +88,7 @@
         .btn-main:hover { transform: translateY(-3px); }
 
         /* --- RECURSOS --- */
+
         .features { padding: 0 8% 100px; background: var(--bg-soft); }
         .section-header { text-align: center; margin-bottom: 60px; }
         .section-header h2 { font-size: 36px; font-weight: 800; color: #007B9A; }
@@ -94,6 +98,7 @@
         .feature-icon { font-size: 32px; color: #007B9A; margin-bottom: 20px; }
 
         /* --- QUEM SOMOS --- */
+
         .about-section { padding: 100px 8%; background: white; text-align: center; }
         .about-content { max-width: 800px; margin: 0 auto; }
         .about-icon { font-size: 50px; color: #007B9A; margin-bottom: 20px; }
@@ -110,8 +115,186 @@
         .univesp-card p { margin-bottom: 0; font-size: 16px; color: #007B9A; font-weight: 700; text-align: center; }
 
         /* --- FOOTER --- */
+
         footer { padding: 40px 8%; background: #007B9A; color: white; text-align: center; }
         .footer-info { opacity: 0.7; font-size: 13px; margin-top: 15px; }
+
+             /* RESPONSIVIDADE */
+
+@media (max-width: 480px) {
+
+    body { padding-top: 0 !important; }
+   
+    .navbar {
+        flex-direction: row-reverse !important;
+        padding: 10px 20px !important;
+        height: 65px !important;
+        justify-content: space-between !important;
+    }
+ 
+    .navbar::before {
+        content: '\f0c9'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+        font-size: 24px; color: #007B9A; order: 2; cursor: pointer;
+    }
+
+   .nav-menu {
+        position: fixed !important;
+        top: 0 !important;
+        left: -100% !important;
+        width: 280px !important;
+        height: 100vh !important;
+        background: rgba(255, 255, 255, 0.85) !important; 
+        backdrop-filter: blur(15px) !important; 
+        -webkit-backdrop-filter: blur(15px) !important;
+
+        flex-direction: column !important;
+        padding: 30px 20px 20px 20px !important; 
+        gap: 8px !important; 
+        transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important; 
+        z-index: 9999 !important;
+        box-shadow: 10px 0 30px rgba(0,0,0,0.08) !important;
+        display: flex !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .nav-menu.open { left: 0 !important; }
+
+   .nav-link {
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        color: #003366 !important; 
+        padding: 16px 20px !important;
+        border-radius: 12px !important; 
+        transition: 0.3s !important;
+        display: block !important;
+        width: 100% !important;
+        border-bottom: none !important; 
+    }
+
+    .nav-link:active, .nav-link:hover {
+        background: rgba(0, 123, 154, 0.1) !important;
+        color: #007B9A !important;
+    }
+
+    .hero-content {
+        padding-left: 20px !important;
+        text-align: left !important;
+        max-width: 65% !important; 
+    }
+
+   .hero-content h1 {
+        font-size: 22px !important;
+        line-height: 1.2 !important;
+        margin-bottom: 10px !important;
+    }
+
+    .hero-content p { font-size: 13px !important; max-width: 220px !important; }.hero-content p {
+        font-size: 10px !important;
+        margin-bottom: 20px !important;
+    }
+
+   body .hero-content .btn-main {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important; 
+        text-align: center !important;
+        width: auto !important;
+        min-width: 120px !important; 
+        max-width: 150px !important; 
+        padding: 8px 16px !important; 
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        line-height: 1 !important;
+        border-radius: 50px !important;
+        margin-top: 15px !important;
+        white-space: nowrap !important; 
+    }
+
+    .hero {
+        background-position: 60% center !important;
+        min-height: 550px;
+    }
+
+    .feature-card { padding: 15px !important; display: flex !important; align-items: center !important; gap: 15px !important; border-radius: 12px !important; }
+
+    .feature-icon { font-size: 20px !important; margin: 0 !important; }
+
+    .feature-card h3 { font-size: 15px !important; margin: 0 !important; }
+    
+    .nav-right, .lang-box, .btn-login { display: none !important; }
+
+    .features {
+       padding-top: 30px !important; 
+       padding-bottom: 30px !important; 
+    }
+
+    .feature-grid {
+        margin-bottom: 0 !important;
+    }
+    .section-header {
+        margin-bottom: 40px !important; 
+    }
+    
+    .section-header h2 {
+        margin-top: 0 !important; 
+    }
+
+    .section-header h2 {
+        font-size: 30px !important; 
+        white-space: nowrap !important; 
+        letter-spacing: -0.5px !important;
+        margin-bottom: 30px !important;
+    }
+
+    .about-section {
+        padding-top: 20px !important; 
+        padding-bottom: 50px !important;
+    }
+
+    .about-icon {
+        font-size: 35px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .about-section h2 {
+        margin-bottom: 20px !important;
+    }
+
+    .univesp-card {
+        padding: 20px !important; 
+        width: 100% !important;
+        max-width: 400px !important;
+    }
+
+    .univesp-card h4 {
+        font-size: 20px !important; 
+        white-space: nowrap !important; 
+        display: block !important;
+        letter-spacing: -0.3px !important;
+    }
+
+    .univesp-card p {
+        font-size: 12px !important;
+        margin-top: 5px !important;
+    }
+
+    footer {
+        padding: 40px 15px !important;
+    }
+
+    .footer-info p {
+        font-size: 12px !important; 
+        line-height: 1.6 !important;
+        display: block !important;
+        width: 100% !important;
+        margin-bottom: 10px !important;
+    }
+
+    .footer-info p:last-child {
+        max-width: 250px !important; 
+        margin: 0 auto !important;
+    }
+}
     </style>
 </head>
 <body>
@@ -193,4 +376,21 @@
 
     <script>document.getElementById('ano').textContent = new Date().getFullYear();</script>
 </body>
+
+<script>
+    const nav = document.querySelector('.navbar');
+    const menu = document.querySelector('.nav-menu');
+
+    // Faz o menu abrir e fechar ao clicar
+    nav.addEventListener('click', function(e) {
+        if (e.target.closest('.logo')) return; // Não abre se clicar na logo
+        menu.classList.toggle('open');
+    });
+
+    // Fecha o menu se clicar em qualquer link (Home, Recursos, etc)
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => menu.classList.remove('open'));
+    });
+</script>
+
 </html>
