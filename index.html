@@ -121,6 +121,202 @@
 
              /* RESPONSIVIDADE */
 
+            /* Dispositivos entre 769px e 850px */
+
+@media (min-width: 769px) and (max-width: 850px) {
+
+     body { padding-top: 0 !important; }
+   
+    .navbar {
+        flex-direction: row-reverse !important;
+        padding: 10px 20px !important;
+        height: 65px !important;
+        justify-content: space-between !important;
+    }
+ 
+    .navbar::before {
+        content: '\f0c9'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+        font-size: 24px; color: #007B9A; order: 2; cursor: pointer;
+    }
+
+   .nav-menu {
+        position: fixed !important;
+        top: 0 !important;
+        left: -100% !important;
+        width: 280px !important;
+        height: 100vh !important;
+        background: rgba(255, 255, 255, 0.85) !important; 
+        backdrop-filter: blur(15px) !important; 
+        -webkit-backdrop-filter: blur(15px) !important;
+
+        flex-direction: column !important;
+        padding: 30px 20px 20px 20px !important; 
+        gap: 8px !important; 
+        transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important; 
+        z-index: 9999 !important;
+        box-shadow: 10px 0 30px rgba(0,0,0,0.08) !important;
+        display: flex !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .nav-menu.open { left: 0 !important; }
+
+   .nav-link {
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        color: #003366 !important; 
+        padding: 16px 20px !important;
+        border-radius: 12px !important; 
+        transition: 0.3s !important;
+        display: block !important;
+        width: 100% !important;
+        border-bottom: none !important; 
+    }
+
+    .nav-link:active, .nav-link:hover {
+        background: rgba(0, 123, 154, 0.1) !important;
+        color: #007B9A !important;
+    }
+
+    .hero-content {
+        padding-left: 20px !important;
+        text-align: left !important;
+        max-width: 70% !important; 
+    }
+
+   .hero-content h1 {
+        font-size: 35px !important;
+        line-height: 1.2 !important;
+        margin-bottom: 10px !important;
+    }
+
+    .hero-content p { font-size: 13px !important; max-width: 220px !important; }.hero-content p {
+        font-size: 15px !important;
+        margin-bottom: 20px !important;
+        text-align: justify;
+    }
+
+   body .hero-content .btn-main {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important; 
+        text-align: center !important;
+        width: auto !important;
+        min-width: 200px !important; 
+        max-width: 200px !important; 
+        padding: 16px 16px !important; 
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        line-height: 1 !important;
+        border-radius: 20px !important;
+        margin-top: 15px !important;
+        white-space: nowrap !important; 
+    }
+
+    .hero {
+        background-position: 65% center !important;
+        min-height: 800px;
+    }
+
+  .feature-card {
+    width: 100% !important;
+    max-width: 650px !important; 
+    padding: 15px !important;
+    display: flex !important;
+    align-items: center !important; 
+    gap: 20px !important;
+    border-radius: 12px !important;
+}
+
+  .feature-grid {
+    display: flex !important;
+    flex-direction: column !important; 
+    align-items: center !important;    
+    gap: 30px !important;              
+    margin-bottom: 0 !important;
+}
+
+    .section-header {
+    margin-top: 50px !important;    
+    margin-bottom: 20px !important; 
+    text-align: center !important;
+}
+
+   .features {
+       padding-top: 20px !important; 
+       padding-bottom: 100px !important; 
+    }
+
+
+    .feature-icon { font-size: 20px !important; margin: 0 !important; }
+
+    .feature-card h3 { font-size: 15px !important; margin: 0 !important; }
+    
+    .nav-right, .lang-box, .btn-login { display: none !important; }
+    
+    .section-header h2 {
+        margin-top: 0 !important; 
+    }
+
+    .section-header h2 {
+        font-size: 30px !important; 
+        white-space: nowrap !important; 
+        letter-spacing: -0.5px !important;
+        margin-bottom: 30px !important;
+    }
+
+    .about-section {
+        padding-top: 20px !important; 
+        padding-bottom: 50px !important;
+    }
+
+    .about-icon {
+        font-size: 35px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .about-section h2 {
+        margin-bottom: 20px !important;
+    }
+
+    .univesp-card {
+        padding: 20px !important; 
+        width: 100% !important;
+        max-width: 500px !important;
+    }
+
+    .univesp-card h4 {
+        font-size: 22px !important; 
+        white-space: nowrap !important; 
+        display: block !important;
+        letter-spacing: -0.3px !important;
+    }
+
+    .univesp-card p {
+        font-size: 14px !important;
+        margin-top: 5px !important;
+    }
+
+    footer {
+        padding: 40px 15px !important;
+    }
+
+    .footer-info p {
+        font-size: 13px !important; 
+        line-height: 1.6 !important;
+        display: block !important;
+        width: 100% !important;
+        margin-bottom: 10px !important;
+    }
+
+    .footer-info p:last-child {
+        max-width: 300px !important; 
+        margin: 0 auto !important;
+    }
+}
+
+        /* Dispostivos até 480px */  
+
 @media (max-width: 480px) {
 
     body { padding-top: 0 !important; }

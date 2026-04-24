@@ -130,6 +130,7 @@
 
 /* RESPONSIVIDADE */
 
+/* Dispostivos entre 769px até 850px */
 
 @media (max-height: 850px) and (min-width: 769px) {
     .auth-card {
@@ -153,6 +154,8 @@
         font-size: 1.2rem;
     }
 }
+
+/* Dispostivos até 480px */
 
 @media (max-width: 480px) {
     .auth-card {
